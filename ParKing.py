@@ -1,3 +1,6 @@
+# Trabajo realizado por Javier García González
+#
+#
 #!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 #
