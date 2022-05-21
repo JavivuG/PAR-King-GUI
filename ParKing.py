@@ -44,7 +44,8 @@ class MyFrame(wx.Frame):
         Seleccion_Nivel.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, 0, ""))
         sizer_6.Add(Seleccion_Nivel, 0, wx.EXPAND | wx.LEFT, 15)
 
-        self.list_box_1 = wx.ListBox(self.panel_1, wx.ID_ANY, choices=["NIVEL 1", "NIVEL 2", "NIVEL 3"]) # CHOICES LLAMO A FUNCION QUE EXTRAE LOS NIVELES
+        listaDeNiveles=self.listaNiveles()
+        self.list_box_1 = wx.ListBox(self.panel_1, wx.ID_ANY, choices=listaDeNiveles) # CHOICES LLAMO A FUNCION QUE EXTRAE LOS NIVELES
         self.list_box_1.SetSelection(0)
         sizer_6.Add(self.list_box_1, 1, wx.EXPAND | wx.LEFT | wx.RIGHT, 15)
 
@@ -216,6 +217,8 @@ class MyFrame(wx.Frame):
         self.Bind(wx.EVT_TIMER, self.update, self.timer)
         # end wxGlade
 
+    ## EVENTOS
+    #
     def update(self,event):
         if self.contador == 0:
             self.timer.Stop()
@@ -225,16 +228,62 @@ class MyFrame(wx.Frame):
             self.contador -= 1
 
         self.label_4.SetLabelText(str(self.contador))
+        event.Skip()
 
 
     def pulsarComenzar(self, event):  # wxGlade: MyFrame.<event_handler>
         self.timer.Start(1000)
+        event.Skip()
 
     def pulsarDeshacer(self, event):  # wxGlade: MyFrame.<event_handler>
         self.contador=90
         self.timer.Stop()
         self.label_4.SetLabelText(str(self.contador))
         event.Skip()
+
+    def numeroNiveles(self):  # Funcion que guarda los niveles en el fichero niveles
+        fichero = open("niveles.txt", "r")
+        nivelesExistentes = (int)(fichero.readline().replace("\n", ""))  # Variable que guarda la cantidad de niveles que hay en el fichero
+        fichero.close()  # Cierro el lector de niveles.txt
+        return nivelesExistentes
+
+    def listaNiveles(self):
+        nivelesExistentes=self.numeroNiveles()
+        listaDeNiveles=[]
+        for i in range (nivelesExistentes):
+            numero=str(i+1)
+            listaDeNiveles.append("NIVEL " + numero)
+        return listaDeNiveles
+
+
+    def cochesNivel(self):  # Funcion que me devuelve la lista con coches por cada nivel
+        fichero = open("niveles.txt", "r")
+        cochesLista = fichero.readlines()
+        totalNiveles = self.numeroNiveles() # Numero total de niveles que tiene el fichero
+        coches = []  # Declaro una lista que me almacena los coches por nivel
+
+        cochesLista.pop(0)  # Quito el primer numero de la lista
+
+        for i in range(len(cochesLista)):
+            cochesLista[i] = cochesLista[i].replace("\n",
+                                                    "")  # Quito los saltos de línea del archivo para facilitar su lectura
+
+        for i in range(totalNiveles):
+            coches.append([])
+
+        numero = (int)(cochesLista[0])  # Numero que de coches que tiene el primer nivel
+        aux = 3
+
+        for i in range(
+                totalNiveles):  # Extraigo los coches que hay por nivel a la lista coches que es multidimensional de modo que la posicion n de la lista tenga los coches del nivel n
+            if i == totalNiveles - 1:
+                coches[i] = cochesLista[aux:len(cochesLista)]
+            else:
+                coches[i] = cochesLista[aux:aux + numero]
+                aux = aux + numero + 3
+                numero = (int)(cochesLista[aux - 3])
+        fichero.close()
+        return coches  # Devuelvo la lista con los coches de cada nivel
 
 # end of class MyFrame
 
@@ -250,3 +299,4 @@ class MyApp(wx.App):
 if __name__ == "__main__":
     app = MyApp(0)
     app.MainLoop()
+
