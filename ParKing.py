@@ -5,6 +5,7 @@
 #
 
 import wx
+import wx.adv
 
 # begin wxGlade: dependencies
 # end wxGlade
@@ -42,187 +43,73 @@ class MyFrame(wx.Frame):
 
         Seleccion_Nivel = wx.StaticText(self.panel_1, wx.ID_ANY, "Seleccione Nivel")
         Seleccion_Nivel.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, 0, ""))
-        sizer_6.Add(Seleccion_Nivel, 0, wx.EXPAND | wx.LEFT, 15)
+        sizer_6.Add(Seleccion_Nivel, 0, wx.EXPAND | wx.LEFT , 15)
 
-        listaDeNiveles=self.listaNiveles()
-        self.list_box_1 = wx.ListBox(self.panel_1, wx.ID_ANY, choices=listaDeNiveles) # CHOICES LLAMO A FUNCION QUE EXTRAE LOS NIVELES
-        self.list_box_1.SetSelection(0)
-        sizer_6.Add(self.list_box_1, 1, wx.EXPAND | wx.LEFT | wx.RIGHT, 15)
+        listaDeNivelesMostrar=self.listaNivelesMostrar()
+
+
+        #
+        self.list_box_1 = wx.ListBox(self.panel_1, wx.ID_ANY, choices=listaDeNivelesMostrar) # CHOICES LLAMO A FUNCION QUE EXTRAE LOS NIVELES
+        if (len(self.recogerRecords())==0): # Si el unico nivel que puedo elegir es el 1 entonces lo selecciono por defecto
+            self.list_box_1.SetSelection(0)
+        sizer_6.Add(self.list_box_1, 1, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.BOTTOM, 15)
 
         sizer_7 = wx.BoxSizer(wx.VERTICAL)
         sizer_5.Add(sizer_7, 1, wx.EXPAND, 0)
 
-        self.button_2 = wx.Button(self.panel_1, wx.ID_ANY, "Comenzar")
+        self.button_2 = wx.ToggleButton(self.panel_1, wx.ID_ANY, "Comenzar")
         sizer_7.Add(self.button_2, 1, wx.ALIGN_CENTER_HORIZONTAL | wx.LEFT | wx.RIGHT, 0)
 
         self.button_3 = wx.Button(self.panel_1, wx.ID_ANY, "Deshacer")
-        sizer_7.Add(self.button_3, 1, wx.ALIGN_CENTER_HORIZONTAL | wx.LEFT | wx.RIGHT, 0)
+        sizer_7.Add(self.button_3, 1, wx.ALIGN_CENTER_HORIZONTAL | wx.LEFT | wx.RIGHT , 0)
 
         sizer_8 = wx.BoxSizer(wx.VERTICAL)
         sizer_5.Add(sizer_8, 1, wx.EXPAND, 0)
 
         Tiempo_Restante = wx.StaticText(self.panel_1, wx.ID_ANY, "Tiempo Restante")
         Tiempo_Restante.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, 0, ""))
-        sizer_8.Add(Tiempo_Restante, 0, wx.EXPAND | wx.LEFT, 15)
+        sizer_8.Add(Tiempo_Restante, 0, wx.EXPAND | wx.LEFT | wx.TOP, 15)
 
         self.label_4 = wx.StaticText(self.panel_1, wx.ID_ANY, "90", style=wx.ALIGN_CENTER_HORIZONTAL | wx.ST_NO_AUTORESIZE | wx.ALIGN_CENTER_VERTICAL)
         self.label_4.SetFont(wx.Font(25, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, 0, "Segoe UI"))
         sizer_8.Add(self.label_4, 1, wx.EXPAND, 0)
 
-        grid_sizer_1 = wx.GridSizer(8, 8, 0, 0)
-        sizer_4.Add(grid_sizer_1, 2, wx.EXPAND, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-
-        label_1 = wx.StaticText(self.panel_1, wx.ID_ANY, "Elija un nivel")
-        label_1.SetFont(wx.Font(13, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, 0, ""))
-        sizer_3.Add(label_1, 0, wx.LEFT, 10)
+        #
+        # MATRIZ
+        self.grid_sizer_1 = wx.GridSizer(8,8,0, 0)# Matriz 8x8 con 0 huecos en vertical y horizontal
+        sizer_4.Add(self.grid_sizer_1, 2, wx.EXPAND, 0)
+        self.crearTablero()
+
+        #
+        #
+
+        self.label_1 = wx.StaticText(self.panel_1, wx.ID_ANY, "Elija un nivel")
+        self.label_1.SetFont(wx.Font(13, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, 0, ""))
+        sizer_3.Add(self.label_1, 0, wx.LEFT, 10)
 
         self.panel_1.SetSizer(sizer_1)
 
         self.Layout()
         self.Centre()
 
-        self.Bind(wx.EVT_BUTTON, self.pulsarComenzar, self.button_2)
-        self.Bind(wx.EVT_BUTTON, self.pulsarDeshacer, self.button_3)
 
-        self.contador=90
+        self.Bind(wx.EVT_TOGGLEBUTTON, self.pulsarComenzar, self.button_2)
+        self.Bind(wx.EVT_BUTTON, self.pulsarDeshacer, self.button_3)
+        self.Bind(wx.EVT_LISTBOX, self.seleccionNivel, self.list_box_1)
+
+        self.contador=90 # TIEMPO DE JUEGO
         self.timer = wx.Timer(self)
-        self.Bind(wx.EVT_TIMER, self.update, self.timer)
+        self.Bind(wx.EVT_TIMER, self.cuentaAtras, self.timer)
         # end wxGlade
 
     ## EVENTOS
     #
-    def update(self,event):
+    def cuentaAtras(self,event):
         if self.contador == 0:
+            self.label_4.SetLabelText(str(self.contador))
             self.timer.Stop()
-            self.label_4.SetLabel('GAME OVER')
+            self.label_1.SetLabelText("SE ACABÓ EL TIEMPO")
+            self.button_2.SetValue(False)
             return
         else:
             self.contador -= 1
@@ -232,14 +119,120 @@ class MyFrame(wx.Frame):
 
 
     def pulsarComenzar(self, event):  # wxGlade: MyFrame.<event_handler>
-        self.timer.Start(1000)
+
+        if(self.algunElegido()):
+            self.timer.Start(1000)
+            self.label_1.SetLabelText("¡A JUGAR!")
+            self.ordenarLista()
+        else:
+            self.button_2.SetValue(False)
+            self.label_1.SetLabelText("Debes seleccionar un nivel")
+
+
         event.Skip()
 
     def pulsarDeshacer(self, event):  # wxGlade: MyFrame.<event_handler>
         self.contador=90
         self.timer.Stop()
         self.label_4.SetLabelText(str(self.contador))
+
+        self.list_box_1.Deselect(self.nivelElegido()-1)
+        self.button_2.SetValue(False)
+        self.label_1.SetLabelText("Elija un nivel")
+
+
         event.Skip()
+
+    def seleccionNivel(self,event):
+        self.label_1.SetLabelText("Pulse [Comenzar] cuando esté preparado")
+        event.Skip()
+    #
+    #
+
+
+
+    def ordenarLista(self):
+        nivelElegido = self.nivelElegido()
+        cochesNivel=self.cochesNivel()
+        cochesNivelElegido=cochesNivel[nivelElegido-1]
+        cochesNivelElegidoOrdenado=[]
+        listaNumeros=[]
+
+        for indice in cochesNivelElegido:
+            numero=int(indice[2]+indice[1])
+            listaNumeros.append(numero)
+        listaNumeros.sort()
+        for i in range(len(listaNumeros)):
+            for coche in cochesNivelElegido:
+                if (int)(coche[2] + coche[1])==listaNumeros[i]:
+                    cochesNivelElegidoOrdenado.append(coche)
+        return cochesNivelElegidoOrdenado
+
+    def crearTablero(self):
+
+        for i in range(8):
+            for j in range(8):
+                if ((i==0 or i==7 or j==0 or (j==7 and i!=3))):
+                    borde = wx.StaticText(self.panel_1, wx.ID_ANY, "")
+                    borde.SetBackgroundColour(wx.Colour(155, 155, 155))
+                    self.grid_sizer_1.Add(borde,0,wx.EXPAND)
+                else:
+                    self.grid_sizer_1.Add((0,0),0,0)
+
+
+
+    def nivelElegido(self):
+        if(self.algunElegido()):
+            nivelElegido = self.list_box_1.GetSelection() + 1  # Nivel elegido contando desde 1
+            return nivelElegido
+
+    def algunElegido(self):
+        listaDeNivelesMostrar=self.listaNivelesMostrar()
+        for i in range(len(listaDeNivelesMostrar)):
+            if (self.list_box_1.IsSelected(i)):
+                return True
+        return False
+
+    def recogerRecords(self):  # Funcion que recoge los records existentes y los guarda en una lista
+        fichero = open("records.txt", "r")  # Abro y leo el fichero de records
+        recordsPartida = []  # Declaro la lista para almacenar los ficheros
+
+        for record in fichero:  # Recorro el fichero records para almacenar los records de cada nivel en una lista
+            record = int(record)
+            recordsPartida.append(record)  # Añado a la lista el record que esta almacenado en el fichero
+        fichero.close()  # Cierro el lector del fichero records.txt
+
+        return recordsPartida  # Devuelvo la lista de records
+
+    def listaNivelesConRecord(self): # Funcion que devuelve la lista de niveles con record
+        nivelesConRecord=len(self.recogerRecords())
+        listaDeNivelesConRecord=[]
+        listaDeRecords=self.recogerRecords()
+        for i in range (nivelesConRecord):
+            listaDeNivelesConRecord.append("NIVEL " + str(i+1) + " - "+ str(listaDeRecords[i]) + " Puntos")
+
+        return listaDeNivelesConRecord
+
+    def listaNivelesMostrar(self): # Funcion que devuelve la lista de niveles que se debe de mostrar en la lista de seleccion
+        listaDeNivelesMostrar=self.listaNivelesConRecord()
+        nivelesConRecord=len(self.recogerRecords())
+        listaDeRecords = self.recogerRecords()
+
+        listaDeNivelesMostrar.append("NIVEL "+ str(nivelesConRecord+1) + " - SIN RECORDS")
+
+        return listaDeNivelesMostrar # Devuelvo la lista
+
+    def escribirRecords(cont, recordsPartida, nivelElegido):  # Funcion que escribe en el fichero
+        fichero = open("records.txt", "w")
+        if (recordsPartida[0] == 0):  # Si la primera posicion es 0 la quito
+            recordsPartida.pop(0)
+        recordsPartida.append(cont)
+
+        for i in range(len(recordsPartida)):
+            fichero.write(str(recordsPartida[i]) + "\n")
+        fichero.flush()
+        fichero.close()
+
 
     def numeroNiveles(self):  # Funcion que guarda los niveles en el fichero niveles
         fichero = open("niveles.txt", "r")
@@ -255,24 +248,21 @@ class MyFrame(wx.Frame):
             listaDeNiveles.append("NIVEL " + numero)
         return listaDeNiveles
 
-
     def cochesNivel(self):  # Funcion que me devuelve la lista con coches por cada nivel
         fichero = open("niveles.txt", "r")
         cochesLista = fichero.readlines()
-        totalNiveles = self.numeroNiveles() # Numero total de niveles que tiene el fichero
+        totalNiveles = self.numeroNiveles()  # Numero total de niveles que tiene el fichero
         coches = []  # Declaro una lista que me almacena los coches por nivel
-
         cochesLista.pop(0)  # Quito el primer numero de la lista
 
         for i in range(len(cochesLista)):
-            cochesLista[i] = cochesLista[i].replace("\n",
-                                                    "")  # Quito los saltos de línea del archivo para facilitar su lectura
+            cochesLista[i] = cochesLista[i].replace("\n","")  # Quito los saltos de linea del archivo para facilitar su lectura
 
         for i in range(totalNiveles):
             coches.append([])
 
         numero = (int)(cochesLista[0])  # Numero que de coches que tiene el primer nivel
-        aux = 3
+        aux = 1
 
         for i in range(
                 totalNiveles):  # Extraigo los coches que hay por nivel a la lista coches que es multidimensional de modo que la posicion n de la lista tenga los coches del nivel n
@@ -280,8 +270,8 @@ class MyFrame(wx.Frame):
                 coches[i] = cochesLista[aux:len(cochesLista)]
             else:
                 coches[i] = cochesLista[aux:aux + numero]
-                aux = aux + numero + 3
-                numero = (int)(cochesLista[aux - 3])
+                aux = aux + numero + 1
+                numero = (int)(cochesLista[aux - 1])
         fichero.close()
         return coches  # Devuelvo la lista con los coches de cada nivel
 
@@ -295,8 +285,11 @@ class MyApp(wx.App):
         return True
 
 # end of class MyApp
-
-if __name__ == "__main__":
+def main():
     app = MyApp(0)
     app.MainLoop()
+
+if __name__ == "__main__":
+    main()
+
 
